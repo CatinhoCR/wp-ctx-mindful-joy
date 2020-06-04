@@ -1,0 +1,3 @@
+# CATIX MINDFUL JOY WP THEME
+
+Gulp. Custom.
