@@ -1,0 +1,26 @@
+/*!
+Theme Name: catix-mindful-joy-gulp
+Theme URI: 
+Author: Cato
+Author URI: http://cato.castilloquesada.com
+Description: Custom theme based on catix-mindful-joy-gulp and adapted to work with Gulp 4, Webpack, SCSS, etc.
+Version: 1.0.0
+Tested up to: 
+Requires PHP: 
+License: 
+License URI: 
+Text Domain: catix
+Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned.
+
+catix-mindful-joy-gulp is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+*/
+
+@charset 'utf-8';
+@import './abstracts/abstracts-dir';
+@import './base/base-dir';
+@import './layouts/layouts-dir';
+@import './components/components-dir';
