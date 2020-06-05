@@ -1,6 +1,23 @@
 # CATIX MINDFUL JOY WP THEME
 
-Gulp. Custom.
+Custom WP theme based on _s to work with Gulp 4 for task automation. Work in progress and at a very young state.
+
+## Dependencies
+
+* Wordpress
+* Node.js
+* Yarn
+* 
+
+## Install and Usage
+
+```bash
+yarn install
+```
+
+```bash
+yarn serve OR gulp build
+```
 
 ## TO Do
 

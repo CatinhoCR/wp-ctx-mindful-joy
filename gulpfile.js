@@ -31,6 +31,13 @@ const php = {
     build: dir.build
 };
 
+// copy PHP files
+gulp.task('php', function() {
+    return gulp.src(php.src)
+        .pipe(newer(php.build))
+        .pipe(gulp.dest(php.build));
+});
+
 // image settings
 const images = {
     src: dir.src + 'img/**/*',
@@ -38,7 +45,7 @@ const images = {
 };
 
 // image processing
-gulp.task('images', () => {
+gulp.task('images', function() {
     return gulp.src(images.src)
         .pipe(newer(images.build))
         .pipe(imagemin())
@@ -61,10 +68,10 @@ var css = {
         require('postcss-assets')({
             loadPaths: ['img/'],
             basePath: dir.build,
-            baseUrl: ''
+            baseUrl: '.'
         }),
         require('autoprefixer')({
-            browsers: ['last 2 versions', '> 2%']
+            overrideBrowserslist: ['last 2 versions', '> 2%']
         }),
         require('css-mqpacker'),
         require('cssnano')
@@ -72,13 +79,13 @@ var css = {
 };
 
 // CSS processing
-gulp.task('css', ['images'], () => {
+gulp.task('css', gulp.series('images', function() {
     return gulp.src(css.src)
         .pipe(sass(css.sassOpts))
         .pipe(postcss(css.processors))
         .pipe(gulp.dest(css.build))
         .pipe(browsersync ? browsersync.reload({ stream: true }) : gutil.noop());
-});
+}));
 
 
 // JavaScript settings
@@ -89,7 +96,7 @@ const js = {
 };
 
 // JavaScript processing
-gulp.task('js', () => {
+gulp.task('js', function() {
 
     return gulp.src(js.src)
         .pipe(deporder())
@@ -101,12 +108,5 @@ gulp.task('js', () => {
 
 });
 
-// copy PHP files
-gulp.task('php', () => {
-    return gulp.src(php.src)
-        .pipe(newer(php.build))
-        .pipe(gulp.dest(php.build));
-});
-
 // run all tasks
-gulp.task('build', ['php', 'css', 'js']);
+gulp.task('build', gulp.series(['php', 'css']));

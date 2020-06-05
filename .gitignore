@@ -38,5 +38,6 @@ Thumbs.db
 **/.sass-cache/*
 **/.map
 
-# Composer #
+# Plugins #
 ##########
+!/mu-plugins/*.zip
