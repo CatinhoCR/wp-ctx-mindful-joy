@@ -1,6 +1,8 @@
 const { src, dest, task, watch, series, parallel } = require("gulp");
 
 // Utility plugins
+// import webpack from 'webpack-stream';
+const webpack = require("webpack-stream");
 const rename = require("gulp-rename");
 const sourcemaps = require("gulp-sourcemaps");
 const plumber = require("gulp-plumber");
@@ -21,17 +23,20 @@ const uglify = require("gulp-uglify");
 // File paths
 const mapURL = "./";
 const fileSrc = {
-    styleSrc: "./assets/scss/styles.scss",
+  styleSrc: "./assets/scss/styles.scss",
+  jsSrc: "./assets/js/*.js",
 };
 // Watch file paths
 const watchFiles = {
-    styleWatch: "./assets/scss/**/*.scss",
-    phpWatch: "./**/*.php",
+  styleWatch: "./assets/scss/**/*.scss",
+  jsWatch: "./assets/js/*.js",
+  phpWatch: "./**/*.php",
 };
 
 // Public compiled destination paths
 const publicDist = {
-    styleURL: "./dist/",
+  styleURL: "./dist/",
+  jsURL: "./dist/",
 };
 
 // Environments compilation options for webpack
@@ -41,68 +46,121 @@ const dev_env = argv.prod || "dev";
 // Browers related plugins & functions
 const browserSync = require("browser-sync").create();
 async function allBrowsers() {
-    browserChoice = [
-        `safari`,
-        `firefox`,
-        `google chrome`,
-        `opera`,
-        `microsoft-edge`,
-    ];
+  browserChoice = [
+    `safari`,
+    `firefox`,
+    `google chrome`,
+    `opera`,
+    `microsoft-edge`,
+  ];
 }
 /**
  * BrowserSync Functions for browser live-reloading, watching file changes and auto compile on save.
  */
 function browser_sync(done) {
-    browserSync.init({
-        proxy: "https://www.catix-mindful-joy.dev",
-        port: 4200,
-        open: false,
-        done,
-    });
+  browserSync.init({
+    proxy: "https://www.catix-mindful-joy.dev",
+    port: 4200,
+    open: false,
+    done,
+  });
 }
 
 function reload(done) {
-    browserSync.reload();
-    done();
+  browserSync.reload();
+  done();
 }
 
 /**
  * Utility Functions - Cleaning, etc.
  */
 function clean(cb) {
-    // body omitted
-    console.log(dev_env);
-    cb();
+  // body omitted
+  console.log(dev_env);
+  cb();
 }
 
 /**
  * Styles - Custom styles, vendor styles, different handling based on envs for dev or prod.
  */
 function styles(done) {
-    src([fileSrc.styleSrc])
-        .pipe(sourcemaps.init())
-        .pipe(
-            sass({
-                errLogToConsole: true,
-                outputStyle: "expanded",
-            })
-        )
-        .on("error", console.error.bind(console))
-        .pipe(
-            autoprefixer({
-                overrideBrowserslist: ["last 2 versions", "> 5%", "Firefox ESR"],
-            })
-        )
-        // .pipe(rename({ suffix: '.min' }))
-        .pipe(sourcemaps.write(mapURL))
-        .pipe(dest(publicDist.styleURL))
-        .pipe(browserSync.stream());
-    done();
+  src([fileSrc.styleSrc])
+    .pipe(sourcemaps.init())
+    .pipe(
+      sass({
+        errLogToConsole: true,
+        outputStyle: "expanded",
+      })
+    )
+    .on("error", console.error.bind(console))
+    .pipe(
+      autoprefixer({
+        overrideBrowserslist: ["last 2 versions", "> 5%", "Firefox ESR"],
+      })
+    )
+    // .pipe(rename({ suffix: '.min' }))
+    .pipe(sourcemaps.write(mapURL))
+    .pipe(dest(publicDist.styleURL))
+    .pipe(browserSync.stream());
+  done();
 }
 
 /**
  * Scripts - Custom scripts, vendor scripts, different handling based on envs for dev or prod.
  */
+function scripts(done) {
+  return src("assets/js/bundle.js")
+    .pipe(
+      webpack({
+        module: {
+          rules: [
+            {
+              test: /\.js$/,
+              use: {
+                loader: "babel-loader",
+                options: {
+                  presets: [],
+                },
+              },
+            },
+          ],
+        },
+        mode: dev_env ? "production" : "development",
+        devtool: !dev_env ? "inline-source-map" : false,
+        output: {
+          filename: "bundle.js",
+        },
+      })
+    )
+    .pipe(dest("dist/"))
+    .pipe(browserSync.stream());
+  done();
+}
+/*
+export const scripts = () => {
+  return src('src/js/bundle.js')
+  .pipe(webpack({
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: []
+            }
+          }
+        }
+      ]
+    },
+    mode: PRODUCTION ? 'production' : 'development',
+    devtool: !PRODUCTION ? 'inline-source-map' : false,
+    output: {
+      filename: 'bundle.js'
+    },
+  }))
+  .pipe(dest('dist/js'));
+}
 function js(done) {
     jsFiles.map(function(entry) {
         return browserify({
@@ -126,12 +184,15 @@ function js(done) {
     });
     done();
 }
+*/
 
 /**
  * Watching
  */
 function watch_files(done) {
-    watch(watchFiles.styleWatch, series(styles, reload));
+  watch(watchFiles.styleWatch, series(styles, reload));
+  watch(watchFiles.jsWatch, series(scripts, reload));
+  
 }
 
 /**
@@ -139,12 +200,13 @@ function watch_files(done) {
  */
 task("clean", clean);
 task("styles", styles);
+task("scripts", scripts);
 // task('js', js);
 // task('images', images);
 // task('fonts', fonts);
 // task('html', html);
 exports.dev = parallel(browser_sync, watch_files);
-exports.default = series(clean, styles);
+exports.default = series(clean, styles, scripts);
 /*
 function cssTranspile(cb) {
   // body omitted
