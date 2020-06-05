@@ -1,0 +1,228 @@
+/// A mixin for generating vendor prefixes on non-standardized properties.
+///
+/// @param {String} $property
+///   Property to prefix
+///
+/// @param {*} $value
+///   Value to use
+///
+/// @param {List} $prefixes
+///   Prefixes to define
+///
+/// @example scss - Usage
+///   .element {
+///     @include prefixer(border-radius, 10px, webkit ms spec);
+///   }
+///
+/// @example css - CSS Output
+///   .element {
+///     -webkit-border-radius: 10px;
+///     -moz-border-radius: 10px;
+///     border-radius: 10px;
+///   }
+///
+/// @require {variable} $prefix-for-webkit
+/// @require {variable} $prefix-for-mozilla
+/// @require {variable} $prefix-for-microsoft
+/// @require {variable} $prefix-for-opera
+/// @require {variable} $prefix-for-spec
+/// Global variables to enable or disable vendor prefixes
+
+$prefix-for-webkit: true !default;
+$prefix-for-mozilla: true !default;
+$prefix-for-microsoft: true !default;
+$prefix-for-opera: true !default;
+$prefix-for-spec: true !default;
+
+@mixin prefixer($property, $value, $prefixes) {
+  @each $prefix in $prefixes {
+    @if $prefix==webkit {
+      @if $prefix-for-webkit {
+        -webkit-#{$property}: $value;
+      }
+    }
+
+    @else if $prefix==moz {
+      @if $prefix-for-mozilla {
+        -moz-#{$property}: $value;
+      }
+    }
+
+    @else if $prefix==ms {
+      @if $prefix-for-microsoft {
+        -ms-#{$property}: $value;
+      }
+    }
+
+    @else if $prefix==o {
+      @if $prefix-for-opera {
+        -o-#{$property}: $value;
+      }
+    }
+
+    @else if $prefix==spec {
+      @if $prefix-for-spec {
+        #{$property}: $value;
+      }
+    }
+
+    @else {
+      @warn "Unrecognized prefix: #{$prefix}";
+    }
+  }
+}
+
+@mixin disable-prefix-for-all() {
+  $prefix-for-webkit: false !global;
+  $prefix-for-mozilla: false !global;
+  $prefix-for-microsoft: false !global;
+  $prefix-for-opera: false !global;
+  $prefix-for-spec: false !global;
+}
+
+// Generates an @font-face declaration.
+// Accepts arguments for weight, style, usage with the Rails Asset Pipeline and file formats.
+// @include font-face("source-sans-pro", "/fonts/source-sans-pro/source-sans-pro-regular");
+// @include font-face("source-sans-pro", "/fonts/source-sans-pro/source-sans-pro-bold", bold);
+// @include font-face("source-sans-pro", "/fonts/source-sans-pro/source-sans-pro-italic", normal, italic);
+// The $file-formats argument allows you specify your font’s file formats (the default is eot woff2 woff ttf svg:
+// @include font-face("source-sans-pro", "/fonts/source-sans-pro/source-sans-pro-regular", $file-formats: eot woff2 woff);
+// You can also use the Rails Asset Pipeline (place the fonts in app/assets/fonts/:
+// @include font-face("source-sans-pro", "source-sans-pro/source-sans-pro-regular", normal, $asset-pipeline: true, $file-formats: eot woff ttf);
+@mixin font-face($font-family,
+  $file-path,
+  $weight: normal,
+  $style: normal,
+  $asset-pipeline: $asset-pipeline,
+  $file-formats: eot woff2 woff ttf svg) {
+
+  $font-url-prefix: font-url-prefixer($asset-pipeline);
+
+  @font-face {
+    font-family: $font-family !important;
+    font-style: $style;
+    font-weight: $weight;
+
+    src: font-source-declaration($font-family,
+        $file-path,
+        $asset-pipeline,
+        $file-formats,
+        $font-url-prefix);
+  }
+}
+
+
+// Shorthand mixin. Supports multiple parentheses-deliminated values for each variable.
+// Example: @include transition (all 2s ease-in-out);
+//          @include transition (opacity 1s ease-in 2s, width 2s ease-out);
+//          @include transition-property (transform, opacity);
+
+@mixin transition($properties...) {
+  // Fix for vendor-prefix transform property
+  $needs-prefixes: false;
+  $webkit: ();
+  $moz: ();
+  $spec: ();
+
+  // Create lists for vendor-prefixed transform
+  @each $list in $properties {
+    @if nth($list, 1)=="transform" {
+      $needs-prefixes: true;
+      $list1: -webkit-transform;
+      $list2: -moz-transform;
+      $list3: ();
+
+      @each $var in $list {
+        $list3: join($list3, $var);
+
+        @if $var !="transform" {
+          $list1: join($list1, $var);
+          $list2: join($list2, $var);
+        }
+      }
+
+      $webkit: append($webkit, $list1);
+      $moz: append($moz, $list2);
+      $spec: append($spec, $list3);
+    }
+
+    @else {
+      $webkit: append($webkit, $list, comma);
+      $moz: append($moz, $list, comma);
+      $spec: append($spec, $list, comma);
+    }
+  }
+
+  @if $needs-prefixes {
+    -webkit-transition: $webkit;
+    -moz-transition: $moz;
+    transition: $spec;
+  }
+
+  @else {
+    @if length($properties)>=1 {
+      @include prefixer(transition, $properties, webkit moz spec);
+    }
+
+    @else {
+      $properties: all 0.15s ease-out 0s;
+      @include prefixer(transition, $properties, webkit moz spec);
+    }
+  }
+}
+
+@mixin transition-property($properties...) {
+  -webkit-transition-property: transition-property-names($properties, "webkit");
+  -moz-transition-property: transition-property-names($properties, "moz");
+  transition-property: transition-property-names($properties, false);
+}
+
+@mixin transition-duration($times...) {
+  @include prefixer(transition-duration, $times, webkit moz spec);
+}
+
+@mixin transition-timing-function($motions...) {
+  // ease | linear | ease-in | ease-out | ease-in-out | cubic-bezier()
+  @include prefixer(transition-timing-function, $motions, webkit moz spec);
+}
+
+@mixin transition-delay($times...) {
+  @include prefixer(transition-delay, $times, webkit moz spec);
+}
+
+@mixin sidebar-configuration () {
+  background-color: #fff;
+  text-align: center;
+  position: absolute;
+  height: 100%;
+  width: 7em;
+  top: 0em;
+  left: 0;
+}
+
+@mixin box-shadow-profile-menu () {
+  -webkit-box-shadow: 0em 0em .3em 0em $light-gray;
+  -moz-box-shadow: 0em 0em .3em 0em $light-gray;
+  box-shadow: 0em 0em .3em 0em $light-gray;
+}
+
+@mixin box-shadow ($pH, $pV, $fade, $spread, $color) {
+  -webkit-box-shadow: $pH $pV $fade $spread $color;
+  -moz-box-shadow: $pH $pV $fade $spread $color;
+  box-shadow: $pH $pV $fade $spread $color;
+}
+
+@mixin transition ($time) {
+  -webkit-transition: $time ease-in-out;
+  -moz-transition: $time ease-in-out;
+  transition: $time ease-in-out;
+}
+
+
+
+
+@mixin icon($icon) {
+  @include fa-icon;
+  @extend .fa;
+  @extend .fa-#{$icon}:before;
+}

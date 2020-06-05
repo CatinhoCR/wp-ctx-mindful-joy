@@ -1,0 +1,115 @@
+/* 
+ * Typography Related Styles
+ * 
+ */
+body {
+  font-family: $open-sans;
+  color: $dark-blue;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  color: $dark-blue;
+  font-weight: 700;
+
+  &.os-light {
+    font-weight: 300;
+  }
+}
+
+h2 {
+  font-size: rem(16);
+}
+
+h3 {
+  font-size: rem(13);
+  text-transform: uppercase;
+}
+
+div,
+i,
+table,
+div,
+thead,
+th,
+td,
+p,
+a,
+input,
+textarea,
+label,
+li,
+.card {
+  font-size: rem(16);
+}
+
+small {
+  font-size: rem(11);
+}
+
+.italic {
+  font-style: italic;
+}
+
+/*
+@import url('https://fonts.googleapis.com/css?family=Open+Sans|Open+Sans+Condensed:300,400,400i,700,800');
+$open-sans: 'Open Sans',
+sans-serif;
+$open-sans-condensed: 'Open Sans Condensed',
+sans-serif;
+body {
+    font-family: $open-sans;
+    color: $dark-blue;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: $dark-blue;
+    font-weight: 700;
+    &.os-light {
+        font-weight: 300;
+    }
+}
+
+h2 {
+    font-size: rem(16);
+}
+
+h3 {
+    font-size: rem(13);
+    text-transform: uppercase;
+}
+
+div,
+i,
+table,
+div,
+thead,
+th,
+td,
+p,
+a,
+input,
+textarea,
+label,
+li,
+.card {
+    font-size: rem(14);
+}
+
+small {
+    font-size: rem(11);
+}
+
+.italic {
+    font-style: italic;
+}
+*/

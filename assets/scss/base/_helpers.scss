@@ -1,0 +1,169 @@
+.hidden {
+    display: none !important;
+}
+
+.no-pad {
+    padding: 0 !important;
+}
+
+.inline-list {
+    li {
+        display: inline-block;
+    }
+}
+
+.rotate {
+    transform: rotate(270deg);
+}
+
+.uppercase {
+    text-transform: uppercase;
+}
+
+.gray-txt {
+    color: $fonts-light;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.inline-block {
+    display: inline-block;
+    margin-right: rem(20) !important;
+}
+
+.red {
+    color: $red;
+}
+
+.blue {
+    color: $royal-blue;
+}
+
+.green {
+    color: $dark-green;
+}
+
+.yellow {
+    color: $yellow;
+}
+
+.icon-right {
+    position: absolute;
+    top: rem(22);
+    right: rem(12);
+    font-size: rem(16);
+}
+
+.circled-icon {
+    border: 2px solid #fff;
+    border-radius: 50%;
+    width: rem(40);
+    height: rem(40);
+    text-align: center;
+    font-size: rem(20);
+    line-height: 1.6;
+}
+
+i,
+.svg-inline--fa {
+    @include transition(.2s all);
+
+    &.swapped {
+        opacity: 0;
+    }
+
+    &.show {
+        opacity: 1;
+    }
+}
+
+
+/*
+.main-label{
+  color: $astronaut-blue;
+}
+
+.secondary-label{
+  color: #777F8F;
+
+  &.margin{
+    margin-left: 2em;
+  }
+}
+
+.relative{
+    position: relative;
+    padding: 0;
+}
+.not-relative{
+    position: static;
+}
+.uppercase{
+    text-transform: uppercase;
+}
+
+ .vertically-centered{
+     position: absolute;
+     top: 50%;
+     left: 50%;
+     transform: translateY(-50%) translateX(-50%);
+     width: 100%;
+ }
+
+.inline-block{
+    display: inline-block;
+}
+
+ .circular-text{
+    background-color: #fff;
+    border-radius: 50%;
+    color: $dark-blue;
+    font-weight: 700;
+    height: rem(40);
+    width: rem(40);
+    line-height: rem(40);
+    text-align: center;
+    display: inline-block;
+    &:hover{
+        background-color: $coral-red;
+    }
+}
+
+.rotate90 {
+    max-width: 100%;
+    -webkit-transform: rotate(90deg);
+    -moz-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+
+.rotate180 {
+    max-width: 100%;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.rotate270 {
+    max-width: 100%;
+    -webkit-transform: rotate(270deg);
+    -moz-transform: rotate(270deg);
+    -o-transform: rotate(270deg);
+    -ms-transform: rotate(270deg);
+    transform: rotate(270deg);
+}
+
+.rotate0 {
+    max-width: 100%;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+*/

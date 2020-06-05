@@ -19,8 +19,14 @@ catix-mindful-joy-gulp is based on Underscores https://underscores.me/, (C) 2012
 Underscores is distributed under the terms of the GNU GPL v2 or later.
 */
 
-@charset 'utf-8';
-@import './abstracts/abstracts-dir';
-@import './base/base-dir';
-@import './layouts/layouts-dir';
-@import './components/components-dir';
+@charset 'UTF-8';
+//Vendor
+@import "vendor/__vendor-dir";
+//Abstracts
+@import "abstracts/__abstracts-dir";
+//Base Styles
+@import "base/__base-dir";
+//Components
+@import "components/__components-dir";
+//Layout
+@import "layouts/__layouts-dir";

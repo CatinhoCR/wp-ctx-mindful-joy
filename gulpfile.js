@@ -19,57 +19,60 @@ const autoprefixer = require("gulp-autoprefixer");
 const uglify = require("gulp-uglify");
 
 // File paths
-// const mapURL = './';
+const mapURL = "./";
 const fileSrc = {
-    styleSrc: './assets/scss/style.scss'
+    styleSrc: "./assets/scss/styles.scss",
 };
 // Watch file paths
 const watchFiles = {
-		styleWatch: './assets/scss/**/*.scss',
-		phpWatch: './**/*.php'
+    styleWatch: "./assets/scss/**/*.scss",
+    phpWatch: "./**/*.php",
 };
 
 // Public compiled destination paths
 const publicDist = {
-		styleURL: './dist/css/',
+    styleURL: "./dist/",
 };
+
+// Environments compilation options for webpack
+// process.env.NODE_ENV = argv.production || 'development';
+const dev_env = argv.prod || "dev";
 
 // Browers related plugins & functions
 const browserSync = require("browser-sync").create();
 async function allBrowsers() {
-  browserChoice = [
-    `safari`,
-    `firefox`,
-    `google chrome`,
-    `opera`,
-    `microsoft-edge`,
-  ];
+    browserChoice = [
+        `safari`,
+        `firefox`,
+        `google chrome`,
+        `opera`,
+        `microsoft-edge`,
+    ];
 }
 /**
  * BrowserSync Functions for browser live-reloading, watching file changes and auto compile on save.
  */
 function browser_sync(done) {
-  browserSync.init({
-    server: {
-      baseDir: "./dist",
-      index: "index.html",
-    },
-    port: 4200,
-    done,
-  });
+    browserSync.init({
+        proxy: "https://www.catix-mindful-joy.dev",
+        port: 4200,
+        open: false,
+        done,
+    });
 }
 
 function reload(done) {
-  browserSync.reload();
-  done();
+    browserSync.reload();
+    done();
 }
 
 /**
  * Utility Functions - Cleaning, etc.
  */
 function clean(cb) {
-  // body omitted
-  cb();
+    // body omitted
+    console.log(dev_env);
+    cb();
 }
 
 /**
@@ -81,18 +84,48 @@ function styles(done) {
         .pipe(
             sass({
                 errLogToConsole: true,
-                outputStyle: 'compressed'
+                outputStyle: "expanded",
             })
         )
-        .on('error', console.error.bind(console))
-        .pipe(autoprefixer({ overrideBrowserslist: ['last 2 versions', '> 5%', 'Firefox ESR'] }))
-        .pipe(rename({ suffix: '.min' }))
+        .on("error", console.error.bind(console))
+        .pipe(
+            autoprefixer({
+                overrideBrowserslist: ["last 2 versions", "> 5%", "Firefox ESR"],
+            })
+        )
+        // .pipe(rename({ suffix: '.min' }))
         .pipe(sourcemaps.write(mapURL))
         .pipe(dest(publicDist.styleURL))
         .pipe(browserSync.stream());
     done();
 }
 
+/**
+ * Scripts - Custom scripts, vendor scripts, different handling based on envs for dev or prod.
+ */
+function js(done) {
+    jsFiles.map(function(entry) {
+        return browserify({
+                entries: [fileSrc.jsSrc + entry],
+            })
+            .transform(babelify, { presets: ["@babel/preset-env"] })
+            .bundle()
+            .pipe(source(entry))
+            .pipe(
+                rename({
+                    extname: ".js",
+                })
+            )
+            .pipe(buffer())
+            .pipe(gulpif(options.has("production"), stripDebug()))
+            .pipe(sourcemaps.init({ loadMaps: true }))
+            .pipe(gulpif(options.has("production"), uglify()))
+            .pipe(sourcemaps.write("."))
+            .pipe(dest(publicDist.jsURL))
+            .pipe(browserSync.stream());
+    });
+    done();
+}
 
 /**
  * Watching
@@ -104,14 +137,14 @@ function watch_files(done) {
 /**
  * Tasks from previous functions
  */
-task('clean', clean);
+task("clean", clean);
 task("styles", styles);
 // task('js', js);
 // task('images', images);
 // task('fonts', fonts);
 // task('html', html);
 exports.dev = parallel(browser_sync, watch_files);
-// exports.default = series(clean, js, styles, html, compile);
+exports.default = series(clean, styles);
 /*
 function cssTranspile(cb) {
   // body omitted

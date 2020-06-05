@@ -1,0 +1,44 @@
+.fluid-container {
+  padding: 3.75rem 0 0;
+
+  @media (min-width: 992px) {
+    padding: 0 0 0 3.75rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
+.dashboard-content {
+  padding: rem(36) rem(25);
+
+  section {
+    margin-bottom: rem(30);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  .page-title {
+    a {
+      margin-bottom: rem(30);
+      font-size: rem(15);
+    }
+
+    h1 {
+      margin-top: 0;
+      margin-bottom: rem(10);
+    }
+
+    p {
+      color: $fonts-light;
+      font-size: rem(15);
+    }
+  }
+
+  .page-content {
+    h2 {
+      margin: 0 0 rem(20);
+    }
+  }
+}
