@@ -61,7 +61,7 @@ function browser_sync(done) {
   browserSync.init({
     proxy: "https://www.catix-mindful-joy.dev",
     port: 4200,
-    open: false,
+    open: true,
     done,
   });
 }
