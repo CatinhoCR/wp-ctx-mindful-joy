@@ -1,3 +1,10 @@
+.container {
+  @include media-breakpoint-up(xxl) {
+    
+  }
+}
+
+/*
 .fluid-container {
   padding: 3.75rem 0 0;
 
@@ -42,3 +49,4 @@
     }
   }
 }
+*/

@@ -3,6 +3,7 @@ const { src, dest, task, watch, series, parallel } = require("gulp");
 // Utility plugins
 // import webpack from 'webpack-stream';
 const webpack = require("webpack-stream");
+const named = require("vinyl-named");
 const rename = require("gulp-rename");
 const sourcemaps = require("gulp-sourcemaps");
 const plumber = require("gulp-plumber");
@@ -60,7 +61,7 @@ async function allBrowsers() {
 function browser_sync(done) {
   browserSync.init({
     proxy: "https://www.catix-mindful-joy.dev",
-    port: 4200,
+    port: 3000,
     open: true,
     done,
   });
@@ -78,6 +79,13 @@ function clean(cb) {
   // body omitted
   console.log(dev_env);
   cb();
+}
+
+/**
+ * PHP
+ */
+function php(done) {
+  done();
 }
 
 /**
@@ -109,7 +117,8 @@ function styles(done) {
  * Scripts - Custom scripts, vendor scripts, different handling based on envs for dev or prod.
  */
 function scripts(done) {
-  return src("assets/js/bundle.js")
+  return src(["assets/js/bundle.js", "assets/js/vendors.js"])
+    .pipe(named())
     .pipe(
       webpack({
         module: {
@@ -119,7 +128,7 @@ function scripts(done) {
               use: {
                 loader: "babel-loader",
                 options: {
-                  presets: [],
+                  presets: ['@babel/preset-env'],
                 },
               },
             },
@@ -128,7 +137,7 @@ function scripts(done) {
         mode: dev_env ? "production" : "development",
         devtool: !dev_env ? "inline-source-map" : false,
         output: {
-          filename: "bundle.js",
+          filename: "[name].js",
         },
       })
     )
@@ -186,13 +195,20 @@ function js(done) {
 }
 */
 
+function fonts(done) {
+  return src(["assets/webfonts/*.*"])
+    .pipe(dest("dist/webfonts"))
+    .pipe(browserSync.stream());
+  done();
+}
+
 /**
  * Watching
  */
 function watch_files(done) {
   watch(watchFiles.styleWatch, series(styles, reload));
   watch(watchFiles.jsWatch, series(scripts, reload));
-  
+  watch(watchFiles.phpWatch, series(php, reload));
 }
 
 /**
@@ -201,12 +217,13 @@ function watch_files(done) {
 task("clean", clean);
 task("styles", styles);
 task("scripts", scripts);
+task("fonts", fonts);
 // task('js', js);
 // task('images', images);
 // task('fonts', fonts);
 // task('html', html);
 exports.dev = parallel(browser_sync, watch_files);
-exports.default = series(clean, styles, scripts);
+exports.default = series(clean, fonts, styles, scripts);
 /*
 function cssTranspile(cb) {
   // body omitted
