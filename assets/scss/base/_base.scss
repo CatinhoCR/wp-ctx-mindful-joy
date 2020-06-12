@@ -4,6 +4,12 @@ body {
     font-size: 16px;
 }
 
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+/*
 .fluid-container {
     padding: rem(60) 0 0;
 
@@ -19,10 +25,7 @@ body {
     }
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-}
+
 
 a {
     color: #007ACE;
@@ -60,14 +63,14 @@ textarea {
     -moz-box-shadow: none !important;
     box-shadow: none !important;
 }
-
+*/
 
 /* ==========================================================================
  Print styles.
  Inlined to avoid the additional HTTP request:
  http://www.phpied.com/delay-loading-your-print-css/
 ========================================================================== */
-
+/*
 .print-media {
     margin: 0 auto;
     max-width: rem(820);
@@ -93,7 +96,7 @@ textarea {
         background: transparent !important;
         color: #000 !important;
         /* Black prints faster:
-                                 http://www.sanbeiji.com/archives/953 */
+                                 http://www.sanbeiji.com/archives/953 * /
         box-shadow: none !important;
         text-shadow: none !important;
     }
@@ -114,7 +117,7 @@ textarea {
     /*
    * Don't show links that are fragment identifiers,
    * or use the `javascript:` pseudo protocol
-   */
+   * /
     a[href^="#"]:after,
     a[href^="javascript:"]:after {
         content: "";
@@ -133,7 +136,7 @@ textarea {
     /*
    * Printing Tables:
    * http://css-discuss.incutio.com/wiki/Printing_Tables
-   */
+   * /
     thead {
         display: table-header-group;
     }
@@ -155,3 +158,4 @@ textarea {
         page-break-after: avoid;
     }
 }
+*/

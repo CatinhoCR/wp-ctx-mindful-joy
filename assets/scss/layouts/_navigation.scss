@@ -1,0 +1,122 @@
+.main-site-nav {
+    .custom-logo-link {
+        max-width: rem(200);
+    }
+
+    .navbar-nav {
+        li {
+            position: relative;
+
+            a {
+                transition: all .3s ease;
+                padding: rem(10) rem(15);
+            }
+
+            >a {
+                &:before {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    width: 0;
+                    height: 5px;
+                    // TODO COLOR
+                    background-color: #eb8367;
+                    transition: 0.3s ease;
+                }
+            }
+
+            &.current-menu-item {
+                a {}
+
+                >a {
+                    &:before {
+                        width: 0;
+                        background-color: #ee792b;
+                    }
+                }
+            }
+
+            &:hover {
+                a {}
+
+                >a {
+                    &:before {
+                        width: 100%;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.navbar-toggler {
+    width: 30px;
+    height: 20px;
+    position: relative;
+    margin: 0px;
+    transform: rotate(0deg);
+    transition: .5s ease-in-out;
+    cursor: pointer;
+
+    span {
+        display: block;
+        position: absolute;
+        height: 3px;
+        width: 100%;
+        border-radius: 9px;
+        opacity: 1;
+        left: 0;
+        transform: rotate(0deg);
+        transition: .25s ease-in-out;
+    }
+}
+
+.hamburger-icon {
+    span {
+        background: $darker-blue;
+
+        &:nth-child(1) {
+            top: 0px;
+        }
+
+        &:nth-child(2),
+        &:nth-child(3) {
+            top: 10px;
+        }
+
+        &:nth-child(4) {
+            top: 20px;
+        }
+    }
+
+    &.open {
+        span {
+            &:nth-child(1) {
+                top: 11px;
+                width: 0%;
+                left: 50%;
+            }
+
+            &:nth-child(2) {
+                -webkit-transform: rotate(45deg);
+                -moz-transform: rotate(45deg);
+                -o-transform: rotate(45deg);
+                transform: rotate(45deg);
+            }
+
+            &:nth-child(3) {
+                -webkit-transform: rotate(-45deg);
+                -moz-transform: rotate(-45deg);
+                -o-transform: rotate(-45deg);
+                transform: rotate(-45deg);
+            }
+
+            &:nth-child(4) {
+                top: 11px;
+                width: 0%;
+                left: 50%;
+            }
+        }
+    }
+}

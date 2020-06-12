@@ -1,12 +1,17 @@
 .btn {
     cursor: pointer;
-    border-radius: 2px;
-    padding: rem(10) rem(20);
-    font-size: rem(14);
     @include transition(0.2s all ease-in-out);
-    i {
-        font-size: rem(16);
+    &:not(.btn-outline-secondary) {
+        border-radius: 2px;
+        padding: rem(10) rem(20);
+        font-size: rem(14);
+        i {
+            font-size: rem(16);
+        }
     }
+    
+    
+    
     // Colors
     &.green {
         background-color: #fff;

@@ -15,8 +15,15 @@
 get_header();
 ?>
 
-	<main id="primary" class="site-main">
-
+	<?php 
+		/**
+		 * catix_before_main_content hook
+		 *
+		 * @hooked themename_wrapper_start - 10 (outputs opening divs for the content)
+		 */
+		do_action( 'catix_before_main_content' );
+	 ?>
+	<div class="content-area">
 		<?php
 		while ( have_posts() ) :
 			the_post();
@@ -30,9 +37,19 @@ get_header();
 
 		endwhile; // End of the loop.
 		?>
-
-	</main><!-- #main -->
+	</div>
+	<?php if ( catix_is_has_sidebar() ) : ?>
+		<?php get_sidebar(); ?>
+	<?php endif; ?>
+	<?php 
+		/**
+		 * catix_after_main_content hook
+		 *
+		 * @hooked themename_wrapper_end - 10 (outputs closing divs for the content)
+		 */
+		do_action( 'catix_after_main_content' );
+	 ?><!-- #main -->
 
 <?php
-get_sidebar();
+// get_sidebar();
 get_footer();

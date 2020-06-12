@@ -1,3 +1,4 @@
+/*
 header {
   width: 100%;
   border-bottom: 1px solid #E6E6F0;
@@ -25,4 +26,23 @@ header {
     float: right;
     margin-top: 0.8125rem;
   }
+}
+*/
+.site-header {
+  background-color: #f6f6f6;
+}
+.site-header-content {
+	position:relative;
+	z-index:999;
+	max-width:100%;
+	background-color:white;
+}
+.site-header.is-sticky .site-header-content {
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+}
+.admin-bar .site-header.is-sticky .site-header-content {
+	top:32px;
 }

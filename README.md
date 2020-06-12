@@ -22,6 +22,8 @@ yarn serve OR gulp build
 ## To Do
 
 * Functions.php into `app/folder/files.php` modularize and create nice WP theme
+  * Started doing this. Wrapper functions for content area and wrapper need work. Sidebar option and layout options in app/functions/template-functions.php
+  * page.php for now is the only template including this previous wrapper and etc.
 * Node Environments for building assets
 * Move things from `inc` folder to corresponding place on my structure
 * remove woocommerce.css and move/delete/adapt to my scss structure

@@ -24,6 +24,11 @@ require_once( CATIX_THEME_DIR . '/app/config/config-sidebars.php');
 require_once( CATIX_THEME_DIR . '/app/functions/function-assets.php');
 
 
+require_once( CATIX_THEME_DIR . '/app/functions/template-tags.php');
+require_once( CATIX_THEME_DIR . '/app/functions/template-functions.php');
+
+require_once( CATIX_THEME_DIR . '/app/functions/custom-overrides.php');
+
 /**
  * Implement the Custom Header feature.
  */
