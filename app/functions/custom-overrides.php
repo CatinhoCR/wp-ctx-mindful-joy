@@ -72,5 +72,6 @@ class Catix_Custom_CategoryDropdown extends Walker_CategoryDropdown
     public function start_el( &$output, $category, $depth = 0, $args = array(), $id = 0 ) {
         // Reference:
         // https://developer.wordpress.org/reference/functions/wp_dropdown_categories/
+        // https://getbootstrap.com/docs/4.0/components/input-group/
     }
 }

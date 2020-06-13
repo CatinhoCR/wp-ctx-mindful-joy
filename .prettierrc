@@ -1,0 +1,29 @@
+{
+    "printWidth": 140,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "none",
+    "bracketSpacing": true,
+    "overrides": [
+        {
+            "files": "*.json",
+            "options": {
+                "singleQuote": false
+            }
+        },
+        {
+            "files": "*.php",
+            "options": {
+                "singleQuote": false
+            }
+        },
+        {
+            "files": ".prettierrc",
+            "options": {
+                "tabWidth": 4
+            }
+        }
+    ]
+}

@@ -54,6 +54,7 @@
         "gulp-util": "^3.0.8",
         "gulp-wp-pot": "^2.0.7",
         "postcss-assets": "^5.0.0",
+        "prettier": "2.0.5",
         "vinyl-named": "^1.1.0",
         "webpack": "^4.43.0",
         "webpack-stream": "^5.2.1",

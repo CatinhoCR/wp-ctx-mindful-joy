@@ -43,11 +43,14 @@
 						</div>
 					</button>
 					<!-- Big search for blog and products -->
-					<?php get_template_part( 'custom-search-form' ); ?>
+					<?php get_template_part('custom-search-form'); ?>
 					<!-- user menu (account, cart, etc) -->
 					<!-- another menu list for main site nav, on a dif block below this -->
 					<!-- Collapsible content -->
 					<div>
+						<!-- 
+							TODO
+						 -->
 						<?php catix_woocommerce_cart_link(); ?>
 					</div>
 					<div class="collapse navbar-collapse" id="navbarToggleContent">
