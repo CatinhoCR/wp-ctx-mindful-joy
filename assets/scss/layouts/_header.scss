@@ -29,20 +29,20 @@ header {
 }
 */
 .site-header {
-  background-color: #f6f6f6;
+  background-color: #fff;
 }
 .site-header-content {
-	position:relative;
-	z-index:999;
-	max-width:100%;
-	background-color:white;
+  position: relative;
+  z-index: 999;
+  max-width: 100%;
+  background-color: white;
 }
 .site-header.is-sticky .site-header-content {
-	position:fixed;
-	top:0;
-	left:0;
-	width:100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
 }
 .admin-bar .site-header.is-sticky .site-header-content {
-	top:32px;
+  top: 32px;
 }
