@@ -8,5 +8,5 @@
 // console.log(camera.html);
 // dom.watch();
 
-import './custom';
 console.log('b');
+import './custom';

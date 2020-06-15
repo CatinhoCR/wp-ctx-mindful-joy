@@ -28,30 +28,8 @@
         <a class="skip-link sr-only" href="#primary"><?php esc_html_e('Skip to content', 'catix'); ?></a>
         <header class="site-header is-sticky">
             <div class="container">
-                <nav class="navbar main-site-nav">
-
-                    <!-- <i class="fas fa-camera camera"></i> -->
-                    <!-- Brand Logo -->
-                    <?php the_custom_logo(); ?>
-                    <!-- hamburger menu for mobile-->
-
-                    <!-- Big search for blog and products -->
-                    <?php // get_template_part('custom-search-form'); 
-					?>
-                    <!-- user menu (account, cart, etc) -->
-                    <!-- another menu list for main site nav, on a dif block below this -->
-                    <!-- Collapsible content -->
-                    <div>
-                        <!-- 
-							TODO
-						 -->
-                        <i class="fas fa-shopping-cart"></i>
-                        <?php catix_woocommerce_cart_link(); ?>
-                    </div>
-                </nav>
-            </div>
-            <div class="container">
-                <nav class="navbar main-site-nav navbar-expand-lg">
+                <!-- hamburger menu for mobile-->
+                <nav class="navbar main-site-nav site-header__nav navbar-expand-lg">
                     <button class="navbar-toggler" type="button" data-toggle="collapse"
                         data-target="#navbarToggleContent" aria-controls="navbarToggleContent" aria-expanded="false"
                         aria-label="Toggle navigation">
@@ -62,31 +40,54 @@
                             <span></span>
                         </div>
                     </button>
+                    <!-- Brand Logo -->
+                    <?php the_custom_logo(); ?>
+                    <!-- Collapsible content -->
                     <div class="collapse navbar-collapse" id="navbarToggleContent">
                         <?php
-						wp_nav_menu(
-							array(
-								'theme_location' => 'catix-primary',
-								'menu_id'        => 'primary-menu',
-								'menu_class'	 => 'navbar-nav',
-								'container'		 => '',
-								'walker'		 => new Catix_Custom_Megamenu()
-							)
-						);
-						?>
-                        <!-- Links -->
-                        <!-- <ul class="navbar-nav mr-auto">
-							<li class="nav-item active">
-								<a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Features</a>
-							</li>
-							<li class="nav-item">
-								<a class="nav-link" href="#">Pricing</a>
-							</li>
-						</ul> -->
-                        <!-- Links -->
+                        wp_nav_menu(
+                            array(
+                                'theme_location' => 'catix-primary',
+                                'menu_id'        => 'primary-menu',
+                                'menu_class'     => 'navbar-nav',
+                                'container'         => '',
+                                'walker'         => new Catix_Custom_Megamenu()
+                            )
+                        );
+                        ?>
+                    </div>
+
+                    <!-- Search -->
+                    <div class="widget dropdown--menu click">
+                        <button class="dropdown--menu__btn btn">
+                            <i class="fas fa-search"></i>
+                            <span class="sr-only"></span>
+                        </button>
+                        <div class="dropdown--menu__content">
+                            <?php get_search_form(); ?>
+                            <?php // get_template_part('custom-search-form'); 
+                            ?>
+                        </div>
+                    </div>
+
+                    <!-- user menu -->
+                    <div class="widget dropdown--menu hover">
+
+                        <?php get_template_part('menu-user'); ?>
+
+                    </div>
+
+                    <!-- cart -->
+                    <div class="widget dropdown--menu click">
+                        <button class="dropdown--menu__btn btn">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count"><?php echo WC()->cart->cart_contents_count; ?></span>
+                            <span class="sr-only"></span>
+                        </button>
+                        <div class="dropdown--menu__content">
+                            <?php catix_woocommerce_cart_link(); ?>
+                            <?php the_widget('WC_Widget_Cart'); ?>
+                        </div>
                     </div>
                 </nav>
             </div>

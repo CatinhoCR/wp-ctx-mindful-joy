@@ -9,25 +9,26 @@
  */
 
 /* Define static constant */
-define( 'CATIX_THEME_DIR', get_template_directory() );
-define( 'CATIX_THEME_URI', get_template_directory_uri() );
+define('CATIX_THEME_DIR', get_template_directory());
+define('CATIX_THEME_URI', get_template_directory_uri());
 
 if (!defined('CATIX_VERSION')) {
 	// Replace the version number of the theme on each release.
 	define('CATIX_VERSION', '1.0.0');
 }
 
-require_once( CATIX_THEME_DIR . '/app/setup.php' );
-require_once( CATIX_THEME_DIR . '/app/config/config-content.php');
-require_once( CATIX_THEME_DIR . '/app/config/config-sidebars.php');
+require_once(CATIX_THEME_DIR . '/app/setup.php');
+require_once(CATIX_THEME_DIR . '/app/config/config-content.php');
+require_once(CATIX_THEME_DIR . '/app/config/config-sidebars.php');
 
-require_once( CATIX_THEME_DIR . '/app/functions/function-assets.php');
+require_once(CATIX_THEME_DIR . '/app/functions/function-assets.php');
+require_once(CATIX_THEME_DIR . '/app/functions/theme-options.php');
+require_once(CATIX_THEME_DIR . '/app/options/book-authors.php');
 
+require_once(CATIX_THEME_DIR . '/app/functions/template-tags.php');
+require_once(CATIX_THEME_DIR . '/app/functions/template-functions.php');
 
-require_once( CATIX_THEME_DIR . '/app/functions/template-tags.php');
-require_once( CATIX_THEME_DIR . '/app/functions/template-functions.php');
-
-require_once( CATIX_THEME_DIR . '/app/functions/custom-overrides.php');
+require_once(CATIX_THEME_DIR . '/app/functions/custom-overrides.php');
 
 /**
  * Implement the Custom Header feature.
@@ -61,4 +62,5 @@ if (defined('JETPACK__VERSION')) {
  */
 if (class_exists('WooCommerce')) {
 	require get_template_directory() . '/inc/woocommerce.php';
+	require get_template_directory() . '/app/functions/function-woocommerce.php';
 }

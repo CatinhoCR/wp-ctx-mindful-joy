@@ -10,14 +10,15 @@
  * Get site layout
  *
  * @return void
- * @author tokoo
+ * @author Catix
  **/
-function catix_get_site_layout() {
-	// $global_layout 	= get_theme_mod( 'catix_global_layout', 'fullwidth' );
-	// $get_layouts 	= catix_get_meta( '_layouts_details' );
+function catix_get_site_layout()
+{
+    // $global_layout 	= get_theme_mod( 'catix_global_layout', 'fullwidth' );
+    // $get_layouts 	= catix_get_meta( '_layouts_details' );
     // $layout 		= ! empty( $get_layouts['theme_layouts'] ) ? $get_layouts['theme_layouts'] : $global_layout;
     $layout = 'fullwidth';
-	return $layout;
+    return $layout;
 }
 
 /**
@@ -73,13 +74,14 @@ function catix_wrapper_class_handles()
  * @return void
  * @author 
  **/
-function catix_is_has_sidebar() { 
-	$get_layouts 	= catix_get_site_layout(); 
-	if ( ! empty( $get_layouts ) && ( 'left-sidebar' == $get_layouts || 'right-sidebar' == $get_layouts ) ) {
-		return true;
-	} else {
-		return false;
-	}
+function catix_is_has_sidebar()
+{
+    $get_layouts     = catix_get_site_layout();
+    if (!empty($get_layouts) && ('left-sidebar' == $get_layouts || 'right-sidebar' == $get_layouts)) {
+        return true;
+    } else {
+        return false;
+    }
 }
 
 
