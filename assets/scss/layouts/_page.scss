@@ -1,9 +1,14 @@
 .container {
-  @include media-breakpoint-up(xxl) {
-    
-  }
+  @include media-breakpoint-up(xxl) {}
 }
 
+.content-block {
+  padding: rem(40) 0;
+
+  &__title {
+    color: #fff;
+  }
+}
 /*
 .fluid-container {
   padding: 3.75rem 0 0;

@@ -61,6 +61,7 @@ if (defined('JETPACK__VERSION')) {
  * Load WooCommerce compatibility file.
  */
 if (class_exists('WooCommerce')) {
-	require get_template_directory() . '/inc/woocommerce.php';
-	require get_template_directory() . '/app/functions/function-woocommerce.php';
+	
+	require_once get_template_directory() . '/app/functions/woocommerce.php';
 }
+// require_once get_template_directory() . '/inc/woocommerce.php';

@@ -2,11 +2,12 @@
 Theme Name: catix-mindful-joy-gulp
 
 WooCommerce styles override
-*/
+* /
 
 /**
  * Shop tables
- */
+ * /
+ /*
 table.shop_table_responsive thead {
 	display: none;
 }
@@ -70,7 +71,7 @@ table.shop_table_responsive tr td.download-actions .button {
 
 /**
  * Products
- */
+ * /
 ul.products {
 	margin: 0;
 	padding: 0;
@@ -134,7 +135,7 @@ ul.products li.product .button {
 
 /**
  * Single product
- */
+ * /
 .single-product div.product {
 	position: relative;
 }
@@ -241,7 +242,7 @@ ul.products li.product .button {
 
 /**
  * Checkout
- */
+ * /
 @media screen and (min-width: 768px) {
 
 	.col2-set .form-row-first {
@@ -262,11 +263,11 @@ ul.products li.product .button {
 
 /**
  * General WooCommerce components
- */
+ * /
 
 /**
  * Header cart
- */
+ * /
 .site-header-cart {
 	position: relative;
 	margin: 0;
@@ -288,7 +289,7 @@ ul.products li.product .button {
 
 /**
  * Star rating
- */
+ * /
 .star-rating {
 	overflow: hidden;
 	position: relative;
@@ -383,7 +384,7 @@ p.stars.selected a:not(.active)::before {
 
 /**
  * Tabs
- */
+ * /
 .woocommerce-tabs ul.tabs {
 	list-style: none;
 	margin: 0;
@@ -408,7 +409,7 @@ p.stars.selected a:not(.active)::before {
 
 /**
  * Password strength meter
- */
+ * /
 .woocommerce-password-strength {
 	text-align: right;
 }
@@ -431,7 +432,7 @@ p.stars.selected a:not(.active)::before {
 
 /**
  * Forms
- */
+ * /
 .form-row.woocommerce-validated input.input-text {
 	box-shadow: inset 2px 0 0 #0f834d;
 }
@@ -446,7 +447,7 @@ p.stars.selected a:not(.active)::before {
 
 /**
  * Notices
- */
+ * /
 .woocommerce-message,
 .woocommerce-info,
 .woocommerce-error,
@@ -481,7 +482,7 @@ p.no-comments {
 
 	/**
 	 * Header cart
-	 */
+	 * /
 	.site-header-cart .widget_shopping_cart {
 		position: absolute;
 		top: 100%;
@@ -501,11 +502,11 @@ p.no-comments {
 
 /**
  * WooCommerce widgets
- */
+ * /
 
 /**
  * WooCommerce Price Filter
- */
+ * /
 .widget_price_filter .price_slider {
 	margin-bottom: 1.5em;
 }
@@ -565,3 +566,4 @@ p.no-comments {
 .widget_price_filter .ui-slider-horizontal .ui-slider-range {
 	height: 100%;
 }
+*/

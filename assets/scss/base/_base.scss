@@ -1,12 +1,26 @@
 html,
 body {
-    font-size: 100%;
-    font-size: 16px;
+  font-size: 100%;
+  font-size: 16px;
 }
 
 img {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
+  display: inline-block;
+}
+
+a,
+button {
+  transition: .2s all ease;
+}
+
+a {
+    color: lighten($secColor, 10);
+    &:hover {
+        color: $secColor;
+        text-decoration: none;
+    }
 }
 
 /*

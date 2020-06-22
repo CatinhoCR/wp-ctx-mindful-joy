@@ -1,0 +1,32 @@
+.blog-post-list {
+    &.single {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
+        transition: 0.3s ease;
+
+        .post-content-cover {
+            
+        }
+        .post-content {
+            padding: rem(12) rem(18);
+        }
+        .post-meta {
+            padding: rem(14);
+            border-top: 1px solid #f0f0f0;
+            background-color: #fbfbfb;
+            img {
+                max-width: rem(40);
+                margin-right: 10px;
+                border: 2px solid white;
+                border-radius: 50%;
+                box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
+            }
+            &.entry-meta {
+
+            }
+        }
+    }
+}

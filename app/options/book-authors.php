@@ -30,7 +30,7 @@ function catix_custom_book_authors()
         'labels'              => $labels,
         'menu_icon' => 'dashicons-edit',
         // Features this CPT supports in Post Editor
-        'supports'            => array('title', 'editor', 'excerpt', 'thumbnail', 'revisions', 'custom-fields', 'page-attributes'),
+        'supports'            => array('title', 'editor', 'thumbnail', 'revisions', 'custom-fields', 'page-attributes'),
         /* A hierarchical CPT is like Pages and can have
         * Parent and child items. A non-hierarchical CPT
         * is like Posts.
@@ -45,6 +45,8 @@ function catix_custom_book_authors()
         'can_export'          => true,
         'has_archive'         => true,
         'exclude_from_search' => false,
+        'query_var'          => true,
+        'rewrite'            => array('slug' => _x('book-author', 'slug', 'catix')),
         'publicly_queryable'  => true,
         'capability_type'     => 'post',
         'show_in_rest' => true,
@@ -60,13 +62,13 @@ function catix_custom_book_authors()
 */
 add_action('init', 'catix_custom_book_authors', 0);
 
-/*add_action( 'init', 'my_cpt_init' );
-function my_cpt_init() {
-    register_post_type( ... );
-}
- 
-add_action( 'after_switch_theme', 'my_rewrite_flush' );
-function my_rewrite_flush() {
-    my_cpt_init();
+/**
+ * To get permalinks to work when you activate the theme
+ * @ Hook: after_switch_theme
+ */
+add_action('after_switch_theme', 'catix_authors_rewrite_flush');
+function catix_authors_rewrite_flush()
+{
+    catix_custom_book_authors();
     flush_rewrite_rules();
-}*/
+}

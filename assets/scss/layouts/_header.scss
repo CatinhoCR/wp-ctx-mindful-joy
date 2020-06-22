@@ -1,4 +1,11 @@
 .site-header {
+  &__nav {
+    &--top {
+    }
+    &--bottom {
+      background-color: #262826;
+    }
+  }
 }
 /*
 header {

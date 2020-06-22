@@ -1,0 +1,12 @@
+.woocommerce-pagination {
+    text-align: center;
+    .page-numbers {
+        padding: 0;
+        li {
+            list-style-type: none;
+            display: inline-block;
+            border: 1px solid #f1f1f1;
+            padding: rem(8) rem(12);
+        }
+    }
+}
