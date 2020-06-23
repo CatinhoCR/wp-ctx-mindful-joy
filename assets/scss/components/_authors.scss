@@ -1,0 +1,44 @@
+.post-author {
+
+}
+
+.posted-by {
+    display: block;
+    margin-bottom: rem(12);
+}
+
+.post-author {
+    .author-info {
+        img, i {
+            max-width: rem(60);
+            width: rem(60);
+            border-radius: 50%;
+            border: 3px solid #fff;
+            box-shadow: 0 1px 10px rgba(0, 0, 0, 0.5);
+            background-color: #eee;
+        }
+        i {
+            font-size: rem(30);
+            line-height: 2;
+            text-align: center;
+        }
+        &.small {
+            img, i {
+                max-width: rem(40);
+                width: rem(40);
+            }
+            i {
+                font-size: rem(20);
+            }
+        }
+    }
+    
+
+    &.author-info-block {
+
+    }
+
+    &.author-details {
+
+    }
+}

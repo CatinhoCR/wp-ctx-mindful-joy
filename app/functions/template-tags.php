@@ -32,10 +32,11 @@ if (!function_exists('catix_posted_on')) :
         $posted_on = sprintf(
             /* translators: %s: post date. */
             esc_html_x('%s', 'post date', 'catix'),
-            '<a href="' . esc_url(get_permalink()) . '" rel="bookmark">' . $time_string . '</a>'
+            '<span class="posted-on-text" rel="bookmark"><i class="fas fa-calendar-alt"></i>' . $time_string . '</span>'
+            // '<a href="' . esc_url(get_permalink()) . '" rel="bookmark"><i class="fas fa-calendar-alt"></i>' . $time_string . '</a>'
         );
 
-        echo '<span class="posted-on">' . $posted_on . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        echo '<div class="posted-on meta-info-block">' . $posted_on . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 
     }
 endif;
@@ -44,20 +45,49 @@ if (!function_exists('catix_posted_by')) :
     /**
      * Prints HTML with meta information for the current author.
      */
+    // 
+    // echo '<pre>' . var_dump($post) . '</pre>';
+    // echo esc_url(get_permalink($post->ID));
     function catix_posted_by()
     {
         $post_author = get_field('post_author');
+        $post = $post_author;
+        setup_postdata( $post );
+            $author_img = get_the_post_thumbnail( $post_author->ID );
+            if (strlen($author_img) === 0) :
+                $author_img = '<i class="far fa-user"></i>';
+            endif;
+            
+            if ( is_singular() ) {
+                $byline = sprintf(
+                    /* translators: %s: post author. */
+                    esc_html_x('%s', 'post author', 'catix'),
+                    '<span class="posted-by">Escrito por</span><span class="author-info">' . __($author_img) . esc_html( $post_author->post_title) . '</span>'
+                );
+            } else {
+                $byline = sprintf(
+                    /* translators: %s: post author. */
+                    esc_html_x('%s', 'post author', 'catix'),
+                    '<span class="author-info small">' . $author_img . esc_html( $post_author->post_title) . '</span>'
+                );
+            }
+            echo '<div class="post-author meta-info-block"> ' . $byline . '</div>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        wp_reset_postdata();
+        
+        /*
         $author_link = get_permalink($post_author->ID);
         // $author_img = catix_post_thumbnail();
         // get_the_post_thumbnail($post_author->ID);
         $byline = sprintf(
-            /* translators: %s: post author. */
+            /* translators: %s: post author. * /
             esc_html_x('%s', 'post author', 'catix'),
             '<a class="post-author author-info" href="' . esc_url(get_permalink()) . '">' . get_the_post_thumbnail( $post_author->ID ) . esc_html( $post_author->post_title) . '</a>'
         );
+        // meta-info-block
         echo $byline;
         // echo esc_html( $post_author->post_title);
         // echo esc_url(( $author_img ));
+        */
         /*
         $byline = sprintf(
             /* translators: %s: post author. * /
@@ -65,8 +95,19 @@ if (!function_exists('catix_posted_by')) :
             '<span class="author vcard"><a class="url fn n" href="' . esc_url(get_author_posts_url(get_the_author_meta('ID'))) . '">' . esc_html(get_the_author()) . '</a></span>'
         );
 
-        echo '<span class="byline"> ' . $byline . '</span>'; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
+        
         */
+    }
+endif;
+
+if (!function_exists('catix_author_info_block')) :
+    /**
+     * Authors Info Block for single posts and books
+     */
+    /// <i class="far fa-user"></i>
+    function catix_author_info_block()
+    {
+        
     }
 endif;
 
@@ -83,14 +124,22 @@ if (!function_exists('catix_single_category')) :
             $cat_name = $category[0]->name;
             $catline = sprintf(
                 esc_html_x( '%s', 'post category', 'catix' ),
-                '<a class="post-category" href="' . esc_url($cat_link) . '">' . esc_html($cat_name) . '</a>'
+                '<a class="post-category" href="' . esc_url($cat_link) . '"><i class="far fa-folder"></i>' . esc_html($cat_name) . '</a>'
             );
-            echo $catline;
-            // echo '<a href="' . esc_url( get_category_link( $category[0]->term_id ) ) . '">' . esc_html( $category[0]->name ) . '</a>';
+            echo '<div class="category-block meta-info-block">' . $catline . '</div>';
         }
     }
 endif;
 
+if (!function_exists('catix_entry_tags')) :
+    /**
+     * Tags
+     */
+    function catix_entry_tags()
+    {
+
+    }
+endif;
 
 if (!function_exists('catix_entry_footer')) :
     /**

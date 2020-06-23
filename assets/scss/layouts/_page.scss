@@ -1,5 +1,25 @@
 .container {
-  @include media-breakpoint-up(xxl) {}
+  @include media-breakpoint-up(md) {
+    &.max-width-720 {
+      max-width: 720px !important;
+    }
+  }
+  @include media-breakpoint-up(lg) {
+    &.max-width-960 {
+      max-width: 960px !important;
+    }
+  }
+  @include media-breakpoint-up(xl) {
+
+  }
+  @include media-breakpoint-up(xxl) {
+    &.max-width-1200 {
+      max-width: 1300px !important;
+    }
+  }
+  // lg: 992px,
+  // xl: 1200px,
+  // xxl: 1600px
 }
 
 .content-block {
@@ -11,6 +31,10 @@
       color: #000;
     }
   }
+}
+
+.site-main {
+  margin-bottom: rem(60);
 }
 /*
 .fluid-container {

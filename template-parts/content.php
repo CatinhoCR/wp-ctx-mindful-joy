@@ -11,7 +11,7 @@
 ?>
 
 <div class="col-lg-4 col-md-6 ">
-	<article id="post-<?php the_ID(); ?>" <?php post_class('blog-post-list single'); ?>>
+	<article id="post-<?php the_ID(); ?>" <?php post_class('blog-post grid single'); ?>>
 		<div class="post-content-cover">
 			<?php echo catix_post_thumbnail(); ?>
 		</div>

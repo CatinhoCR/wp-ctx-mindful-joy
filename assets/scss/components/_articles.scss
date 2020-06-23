@@ -1,27 +1,91 @@
-.blog-post-list {
-    &.single {
+// Single post view
+.blog-post {
+    .meta-info-block {
+
+        i,
+        img {
+            margin-right: rem(16);
+        }
+    }
+
+    &.detail {
+        .post-header {
+            background-color: rgb(249, 249, 249);
+            position: relative;
+
+            .category-block {
+                margin-top: rem(30)
+            }
+
+            h1 {
+                margin: rem(10) 0 rem(20);
+                text-transform: uppercase;
+            }
+
+            .post-author {
+                position: absolute;
+                bottom: rem(20);
+                // transform: translateY(30%);
+            }
+        }
+
+        .post-content {
+            margin: rem(50) 0;
+
+            .posted-on {
+                margin-bottom: rem(30);
+            }
+
+            p {
+                text-align: justify;
+            }
+        }
+    }
+
+    &.list {
+        @extend .clearfix;
+        .post-cover,
+        .post-info {
+            @include media-breakpoint-up(lg) {
+                float: left;
+                width: 65%;
+            }
+        }
+        .post-cover {
+            @include media-breakpoint-up(lg) {
+                width: 35%;
+            }
+        }
+    }
+
+    &.grid {
         overflow: hidden;
         position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
         width: 100%;
         height: 100%;
         background-color: white;
         box-shadow: 0 5px 10px rgba(0, 0, 0, 0.05);
         transition: 0.3s ease;
 
-        .post-content-cover {
-            
-        }
+        .post-content-cover {}
+
         .post-content {
             padding: rem(12) rem(18);
         }
+
         .post-meta {
             padding: rem(14);
             border-top: 1px solid #f0f0f0;
             background-color: #fbfbfb;
+            
             width: 100%;
-            position: absolute;
-            bottom: 0;
-            left: 0;
+            // position: absolute;
+            // bottom: 0;
+            // left: 0;
+
             img {
                 max-width: rem(40);
                 margin-right: 10px;
@@ -29,9 +93,12 @@
                 border-radius: 50%;
                 box-shadow: 0 1px 10px rgba(0, 0, 0, 0.1);
             }
-            &.entry-meta {
 
-            }
+            &.entry-meta {}
         }
     }
 }
+
+// meta tags
+
+// dif layouts for single or listings (and listing layout type selected)
