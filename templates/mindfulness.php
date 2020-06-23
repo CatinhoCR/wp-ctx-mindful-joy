@@ -20,10 +20,10 @@ get_header(); ?>
 
             <?php if (get_row_layout() == 'simple_cta') : ?>
                 <?php include(get_stylesheet_directory() . "/template-parts/blocks/simple-cta.php"); ?>
-            <?php elseif (get_row_layout() == 'recent_products_grid') : ?>
+            <?php elseif (get_row_layout() == 'blog_posts_grid') : ?>
+                <?php include(get_stylesheet_directory() . "/template-parts/blocks/posts-listings.php"); ?>
+            <?php elseif (get_row_layout() == 'products_custom_grid') : ?>
                 <?php include(get_stylesheet_directory() . "/template-parts/blocks/products-listings.php"); ?>
-            <?php elseif (get_row_layout() == 'image') : ?>
-                
             <?php endif; ?>
         <?php endwhile; ?>
     <?php else : ?>
