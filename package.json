@@ -57,7 +57,7 @@
         "postcss-assets": "^5.0.0",
         "prettier": "2.0.5",
         "vinyl-named": "^1.1.0",
-        "webpack": "^4.43.0",
+        "webpack": "^5.94.0",
         "webpack-stream": "^5.2.1",
         "yargs": "^15.3.1"
     },
